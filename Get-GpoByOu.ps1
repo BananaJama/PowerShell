@@ -6,7 +6,7 @@ param (
     $SearchBaseDn
 )
 
-$AocOUs = Get-ADOrganizationalUnit -Filter * -SearchBase $SearchBaseDn -SearchScope Subtree
+$OuTree = Get-ADOrganizationalUnit -Filter * -SearchBase $SearchBaseDn -SearchScope Subtree
 $AllGPOs = Get-GPO -All
 
 # Functions
@@ -32,7 +32,7 @@ function GetGpoFromGuid {
 }
 
 # Main Script
-foreach ($ou in $AocOUs) {
+foreach ($ou in $OuTree) {
     $LinkedGpos = $ou.LinkedGroupPolicyObjects
     $GpoGuids = GetGpoGuids -LinkedGpos $LinkedGpos
     $Gpos = $GpoGuids | ForEach-Object {GetGpoFromGuid -GpoGuid $_ -GpoSearchBank $AllGPOs}
