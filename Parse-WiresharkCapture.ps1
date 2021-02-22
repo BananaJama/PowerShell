@@ -4,7 +4,7 @@ param (
     $FolderPath
 )
 
-$Files = Get-ChildItem $FolderPath -Include '*.pcap'
+$Files = Get-ChildItem $FolderPath -Recurse -Include '*.pcap'
 
 foreach ($i in $Files) {
     $FileName = $i.BaseName
