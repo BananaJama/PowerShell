@@ -9,7 +9,7 @@ function New-RandomPassword {
     )
 
     $RandomWordList = New-Object 'System.Collections.Generic.List[string]'
-    $Uri = 'https://api.datamuse.com/words?sl={0}&max=100' -f $WordSeed
+    $Uri = 'https://api.datamuse.com/words?rel_rhy={0}&max=100' -f $WordSeed
     $Result = Invoke-RestMethod -Uri $Uri
 
     for ($i = 0; $i -lt $WordCount; $i++) {
